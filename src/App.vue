@@ -4,8 +4,11 @@
   import IncomeExpenses from './components/IncomeExpenses.vue';
   import AddTransaction from './components/AddTransaction.vue';
   import TransactionList from './components/TransactionList.vue';
+  import Counter from './components/Counter.vue';
+  import Display from './components/Display.vue';
+  import ResetButton from './components/ResetButton.vue';
 
-  import {ref, computed, onMounted} from 'vue'
+  import {ref, computed, onMounted} from 'vue';
 
   const transactions = ref([])
 
@@ -56,6 +59,16 @@
       transactions.value = savedTransactions
     }
   })
+  
+  const count = ref(0);
+
+  const updateCount = (newCount) => {
+    count.value = newCount;
+  };
+
+  const resetCount = () => {
+    count.value = 0;
+  };
 
 
 
@@ -69,6 +82,9 @@
     <IncomeExpenses :income="moneyIn" :expense="moneyOut"></IncomeExpenses>
     <AddTransaction @transactionSubmitted="handleTransaction"></AddTransaction>
     <TransactionList :transactions="transactions" @transactionDeleted="handleDelete"></TransactionList>
+    <Display :count="count"/>
+    <Counter @updateCount="updateCount"/>
+    <ResetButton @resetCount="resetCount"/>
   </div>
 
 </template>
