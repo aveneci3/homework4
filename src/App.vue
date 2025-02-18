@@ -18,6 +18,7 @@
     },0)
   })
 
+  
   const moneyIn = computed(()=>{
     return transactions.value
     .filter((x)=>x.amount>0)
